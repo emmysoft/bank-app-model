@@ -1,33 +1,55 @@
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import React from "react";
+// import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 
-const AccountDetails = () => {
+import Feature from "../Feat/Feature";
+
+const AccountDetails = ({ navigation }) => {
+  // const navigation = useNavigation();
+
   return (
     <>
       <ScrollView style={styles.scroll}>
-        <Text style={styles.title}>Welcome Emmanuel</Text>
+        <Text style={styles.title}>Hello Emmanuel</Text>
         <View style={styles.innerBox}>
           <Text style={styles.uppercontent}>Account Balance:</Text>
           <Text style={styles.content}>$4375.65</Text>
+          <View style={styles.functions}>
+            <View style={styles.funcFeat}>
+              <Ionicons
+                name="add"
+                size={20}
+                color={"#000"}
+                onPress={() => navigation.navigate("add")}
+              />
+              <Text onPress={() => navigation.navigate("add")}>Add Money</Text>
+            </View>
+            <View style={styles.funcFeat}>
+              <Ionicons
+                name="send"
+                size={20}
+                color={"#000"}
+                onPress={() => navigation.navigate("transfer")}
+              />
+              <Text onPress={() => navigation.navigate("transfer")}>
+                Transfer
+              </Text>
+            </View>
+            <View style={styles.funcFeat}>
+              <Ionicons
+                name="arrow-down"
+                size={20}
+                color={"#000"}
+                onPress={() => navigation.navigate("withdraw")}
+              />
+              <Text onPress={() => navigation.navigate("withdraw")}>
+                Withdraw
+              </Text>
+            </View>
+          </View>
         </View>
-        <View style={styles.features}>
-          <View style={styles.firstRow}>
-            <Ionicons name="rocket" size={24} color={"#000"} />
-            <Ionicons name="rocket" size={24} color={"#000"} />
-            <Ionicons name="rocket" size={24} color={"#000"} />
-          </View>
-          <View style={styles.firstRow}>
-            <Ionicons name="rocket" size={24} color={"#000"} />
-            <Ionicons name="rocket" size={24} color={"#000"} />
-            <Ionicons name="rocket" size={24} color={"#000"} />
-          </View>
-          <View style={styles.firstRow}>
-            <Ionicons name="rocket" size={24} color={"#000"} />
-            <Ionicons name="rocket" size={24} color={"#000"} />
-            <Ionicons name="rocket" size={24} color={"#000"} />
-          </View>
-        </View>
+        <Feature />
       </ScrollView>
     </>
   );
@@ -62,9 +84,10 @@ const styles = StyleSheet.create({
     justifyItems: "center",
     alignItems: "center",
     width: "70%",
+    height: 250,
     borderRadius: 10,
     marginLeft: 60,
-    padding: 40
+    padding: 40,
   },
   uppercontent: {
     fontWeight: 300,
@@ -76,26 +99,20 @@ const styles = StyleSheet.create({
     fontSize: 40,
     color: "#000",
   },
-  features: {
-    backgroundColor: "#fff",
-    border: "1px solid #fff",
+  functions: {
+    display: "flex",
+    flexDirection: "row",
+    justifyItems: "center",
+    alignItems: "center",
+    gap: 24,
+    padding: 22,
+  },
+  funcFeat: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    gap: 40,
-    padding: 34,
-    width: "70%",
-    borderRadius: 10,
-    marginLeft: 60,
-    marginTop: 40,
-  },
-  firstRow: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    gap: 35,
+    gap: 10,
   },
 });
 
