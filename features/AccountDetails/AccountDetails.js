@@ -1,38 +1,55 @@
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import React from "react";
-// import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 
 import Feature from "../Feat/Feature";
 
 const AccountDetails = ({ navigation }) => {
-  // const navigation = useNavigation();
-
   return (
     <>
       <ScrollView style={styles.scroll}>
-        <Text style={styles.title}>Hello Emmanuel</Text>
+        <View style={styles.header}>
+          <Text style={styles.title}>Hello Emmanuel</Text>
+          <View style={styles.headIcon}>
+            <Ionicons
+              name="notifications"
+              size={24}
+              color={"#000"}
+              style={styles.icon}
+              onPress={() => navigation.navigate("Notifications")}
+            />
+            <Ionicons
+              name="log-out"
+              size={24}
+              color={"#ff0000"}
+              onPress={() => navigation.navigate("Welcome to Nuda Bank")}
+              style={styles.logoutButn}
+            />
+          </View>
+        </View>
         <View style={styles.innerBox}>
           <Text style={styles.uppercontent}>Account Balance:</Text>
-          <Text style={styles.content}>$4375.65</Text>
+          <Text style={styles.content}>&#x20A6;9,000,000</Text>
           <View style={styles.functions}>
             <View style={styles.funcFeat}>
               <Ionicons
                 name="add"
                 size={20}
                 color={"#000"}
-                onPress={() => navigation.navigate("add")}
+                onPress={() => navigation.navigate("Add Money")}
               />
-              <Text onPress={() => navigation.navigate("add")}>Add Money</Text>
+              <Text onPress={() => navigation.navigate("Add Money")}>
+                Add Money
+              </Text>
             </View>
             <View style={styles.funcFeat}>
               <Ionicons
                 name="send"
                 size={20}
                 color={"#000"}
-                onPress={() => navigation.navigate("transfer")}
+                onPress={() => navigation.navigate("Transfer")}
               />
-              <Text onPress={() => navigation.navigate("transfer")}>
+              <Text onPress={() => navigation.navigate("Transfer")}>
                 Transfer
               </Text>
             </View>
@@ -41,9 +58,9 @@ const AccountDetails = ({ navigation }) => {
                 name="arrow-down"
                 size={20}
                 color={"#000"}
-                onPress={() => navigation.navigate("withdraw")}
+                onPress={() => navigation.navigate("Withdraw")}
               />
-              <Text onPress={() => navigation.navigate("withdraw")}>
+              <Text onPress={() => navigation.navigate("Withdraw")}>
                 Withdraw
               </Text>
             </View>
@@ -63,6 +80,29 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyItems: "center",
     alignContent: "center",
+  },
+  header: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    gap: 24,
+    marginTop: 30,
+  },
+  headIcon: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    alignItems: "flex-end",
+    // gap: 3,
+  },
+  icon: {
+    marginTop: 20,
+    marginHorizontal: 20,
+  },
+  logoutButn: {
+    marginTop: 20,
+    marginHorizontal: 20,
   },
   title: {
     display: "flex",
@@ -91,13 +131,15 @@ const styles = StyleSheet.create({
   },
   uppercontent: {
     fontWeight: 300,
-    fontSize: 25,
+    fontSize: 15,
     color: "#000",
   },
   content: {
     fontWeight: 500,
     fontSize: 40,
     color: "#000",
+    width: 230,
+    alignItems: "center",
   },
   functions: {
     display: "flex",

@@ -8,44 +8,30 @@ const Feature = () => {
       <View style={styles.features}>
         <View style={styles.firstRow}>
           <View style={styles.funcFeat}>
-            <Ionicons name="rocket" size={24} color={"#000"} />
-            <Text>Airtime</Text>
+            <Ionicons name="phone-portrait" size={24} color={"#000"} />
+            <Text style={styles.funcText}>Airtime</Text>
           </View>
           <View style={styles.funcFeat}>
-            <Ionicons name="rocket" size={24} color={"#000"} />
-            <Text>Data</Text>
+            <Ionicons name="globe-outline" size={24} color={"#000"} />
+            <Text style={styles.funcText}>Data</Text>
           </View>
           <View style={styles.funcFeat}>
-            <Ionicons name="rocket" size={24} color={"#000"} />
-            <Text>Betting</Text>
-          </View>
-        </View>
-        <View style={styles.firstRow}>
-          <View style={styles.funcFeat}>
-            <Ionicons name="rocket" size={24} color={"#000"} />
-            <Text>TV</Text>
-          </View>
-          <View style={styles.funcFeat}>
-            <Ionicons name="rocket" size={24} color={"#000"} />
-            <Text>Electricity</Text>
-          </View>
-          <View style={styles.funcFeat}>
-            <Ionicons name="rocket" size={24} color={"#000"} />
-            <Text>Internet</Text>
+            <Ionicons name="football-outline" size={24} color={"#000"} />
+            <Text style={styles.funcText}>Betting</Text>
           </View>
         </View>
-        <View style={styles.firstRow}>
+        <View style={styles.secondRow}>
           <View style={styles.funcFeat}>
-            <Ionicons name="rocket" size={24} color={"#000"} />
-            <Text>Education</Text>
+            <Ionicons name="tv-outline" size={24} color={"#000"} />
+            <Text style={styles.funcText}>TV</Text>
           </View>
           <View style={styles.funcFeat}>
-            <Ionicons name="rocket" size={24} color={"#000"} />
-            <Text>Transport</Text>
+            <Ionicons name="logo-electron" size={24} color={"#000"} />
+            <Text style={styles.funcText}>Bills</Text>
           </View>
           <View style={styles.funcFeat}>
-            <Ionicons name="rocket" size={24} color={"#000"} />
-            <Text>More</Text>
+            <Ionicons name="earth-outline" size={24} color={"#000"} />
+            <Text style={styles.funcText}>Internet</Text>
           </View>
         </View>
       </View>
@@ -74,6 +60,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     gap: 35,
+  },
+  secondRow: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 45,
+    padding: 20
+  },
+  funcText: {
+    alignItems: "center",
   },
   funcFeat: {
     display: "flex",
