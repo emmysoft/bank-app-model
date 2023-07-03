@@ -28,8 +28,10 @@ const AccountDetails = ({ navigation }) => {
           </View>
         </View>
         <View style={styles.innerBox}>
-          <Text style={styles.uppercontent}>Account Balance:</Text>
-          <Text style={styles.content}>&#x20A6;9,000,000</Text>
+          <View style={styles.acctDetails}>
+            <Text style={styles.uppercontent}>Account Balance:</Text>
+            <Text style={styles.balance}>&#x20A6;13,000,000</Text>
+          </View>
           <View style={styles.functions}>
             <View style={styles.funcFeat}>
               <Ionicons
@@ -96,6 +98,13 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
     // gap: 3,
   },
+  acctDetails: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 4
+  },
   icon: {
     marginTop: 20,
     marginHorizontal: 20,
@@ -134,12 +143,10 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: "#000",
   },
-  content: {
-    fontWeight: 500,
-    fontSize: 40,
+  balance: {
+    fontWeight: 400,
+    fontSize: 30,
     color: "#000",
-    width: 230,
-    alignItems: "center",
   },
   functions: {
     display: "flex",
