@@ -25,56 +25,6 @@ const SignIn = () => {
     }
   };
 
-  // const getData = async () => {
-  //   try {
-  //     const value = await AsyncStorage.getItem("token");
-  //     if (value !== null) {
-  //       setToken({ token: value });
-  //     }
-  //   } catch (e) {}
-  // };
-  // const handleSubmit = async () => {
-  //   const username = "testemmy1";
-  //   const password = "testemmy1234";
-  //   await Keychain.setGenericPassword(username, password); //store credentials
-
-  //   try {
-  //     //retrieve credentials
-  //     const credentials = await Keychain.getGenericPassword();
-  //     if (credentials) {
-  //       console.log("Sucessful login for user" + credentials.username);
-  //     } else {
-  //       console.log("No credentials has stored");
-  //     }
-  //   } catch (error) {
-  //     console.log("keychain couldn't be accessed!", error);
-  //   }
-  //   await Keychain.resetGenericPassword();
-  //   navigation.navigate("Welcome");
-  // };
-
-  //   const checkIfCredentialsWasSaved = async () => {
-  //     const credentials = await Keychain.getGenericPassword();
-  //     if (credentials) {
-  //       setHiddenCredentials({
-  //         ...hiddenCredentials,
-  //         email: credentials.username,
-  //         password: credentials.password
-  //       })
-  //     } else {
-  //       null
-  //     }
-  //   }
-  //   const storeCredentials = async (email: any, password: any) => {
-  //     try {
-  //       await Keychain.setGenericPassword(email, password);
-  //     } catch (error) {
-  //       console.log('failed to store credentials ', error)
-  //     } finally {
-  //       return true
-  //     }
-  //   }
-
   return (
     <>
       <View style={styles.loginPage}>

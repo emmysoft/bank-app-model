@@ -30,7 +30,7 @@ const AccountDetails = ({ navigation }) => {
         <View style={styles.innerBox}>
           <View style={styles.acctDetails}>
             <Text style={styles.uppercontent}>Account Balance:</Text>
-            <Text style={styles.balance}>&#x20A6;13,000,000</Text>
+            <Text style={styles.balance}>&#x20A6;0.00</Text>
           </View>
           <View style={styles.functions}>
             <View style={styles.funcFeat}>

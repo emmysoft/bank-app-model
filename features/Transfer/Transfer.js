@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import CustomInput from "../../components/CustomInput";
 import { TransferButton } from "../../components/CustomButton";
 
-const Transfer = () => {
+const Transfer = ({ navigation }) => {
   const [amount, setAmount] = useState();
   return (
     <View style={styles.container}>
@@ -12,7 +12,12 @@ const Transfer = () => {
         value={amount}
         setValue={() => setAmount()}
       />
-      <TransferButton style={styles.transBtn}>Send Money</TransferButton>
+      <TransferButton
+        style={styles.transBtn}
+        onPress={() => navigation.navigate("Account")}
+      >
+        Send Money
+      </TransferButton>
     </View>
   );
 };

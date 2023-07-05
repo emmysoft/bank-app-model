@@ -26,7 +26,7 @@ const Feature = () => {
             <Text style={styles.funcText}>TV</Text>
           </View>
           <View style={styles.funcFeat}>
-            <Ionicons name="logo-electron" size={24} color={"#000"} />
+            <Ionicons name="cash" size={24} color={"#000"} />
             <Text style={styles.funcText}>Bills</Text>
           </View>
           <View style={styles.funcFeat}>
@@ -67,7 +67,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     gap: 45,
-    padding: 20
+    padding: 20,
+    marginLeft: 40,
   },
   funcText: {
     alignItems: "center",

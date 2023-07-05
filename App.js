@@ -59,7 +59,7 @@ export function Welcome() {
           name="Settings"
           component={Settings}
           options={{
-            headerShown: false,
+            headerStyle: { backgroundColor: "#abc6c4" },
             tabBarIcon: () => (
               <Ionicons name="settings-outline" size={30} color={"#abc6c4"} />
             ),
