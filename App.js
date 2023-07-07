@@ -8,7 +8,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import AccountDetails from "./features/AccountDetails/AccountDetails";
 import SignIn from "./features/Auth/SignIn";
 import Notifications from "./features/Notifications/Notifications";
-import Withdraw from "./features/Withdraw/Withdraw";
+import History from "./features/History/History";
 import Add from "./features/AddMoney/Add";
 import Transfer from "./features/Transfer/Transfer";
 import Profile from "./features/Profile/Profile";
@@ -92,8 +92,8 @@ export function App() {
             options={{ headerStyle: { backgroundColor: "#abc6c4" } }}
           />
           <Stack.Screen
-            name="Withdraw"
-            component={Withdraw}
+            name="History"
+            component={History}
             options={{ headerStyle: { backgroundColor: "#abc6c4" } }}
           />
           <Stack.Screen

@@ -30,7 +30,7 @@ const AccountDetails = ({ navigation }) => {
         <View style={styles.innerBox}>
           <View style={styles.acctDetails}>
             <Text style={styles.uppercontent}>Account Balance:</Text>
-            <Text style={styles.balance}>&#x20A6;0.00</Text>
+            <Text style={styles.balance}>&#x20A6;700,000</Text>
           </View>
           <View style={styles.functions}>
             <View style={styles.funcFeat}>
@@ -57,13 +57,13 @@ const AccountDetails = ({ navigation }) => {
             </View>
             <View style={styles.funcFeat}>
               <Ionicons
-                name="arrow-down"
+                name="book-outline"
                 size={20}
                 color={"#000"}
-                onPress={() => navigation.navigate("Withdraw")}
+                onPress={() => navigation.navigate("History")}
               />
-              <Text onPress={() => navigation.navigate("Withdraw")}>
-                Withdraw
+              <Text onPress={() => navigation.navigate("History")}>
+                History
               </Text>
             </View>
           </View>

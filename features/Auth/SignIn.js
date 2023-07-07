@@ -1,11 +1,12 @@
 import { StyleSheet, Text, View } from "react-native";
 import { useState } from "react";
-import * as Keychain from "react-native-keychain";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Toast from "react-native-toast-message";
 
 import CustomInput from "../../components/CustomInput";
 import { LoginButton } from "../../components/CustomButton";
+// import Toast from "react-native-toast-message";
 
 const SignIn = () => {
   const navigation = useNavigation();
@@ -17,8 +18,12 @@ const SignIn = () => {
     try {
       await AsyncStorage.setItem("token", username);
       if (username === "emmysoft" && password === "emmy123") {
-        console.log("Success");
         navigation.navigate("Welcome");
+        Toast.show({
+          type: "success",
+          text1: "Login Sucessful",
+          text2: "Welcome",
+        });
       }
     } catch (error) {
       console.log(error);
