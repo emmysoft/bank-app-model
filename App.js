@@ -73,7 +73,7 @@ export function Welcome() {
 export function App() {
   return (
     <>
-      <StatusBar style="auto" />
+      <StatusBar style="#abc6c4" />
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
