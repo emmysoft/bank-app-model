@@ -2,31 +2,24 @@ import { StyleSheet, Text, View } from "react-native";
 import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import Toast from "react-native-toast-message";
 
 import CustomInput from "../../components/CustomInput";
 import { LoginButton } from "../../components/CustomButton";
-// import Toast from "react-native-toast-message";
 
 const SignIn = () => {
   const navigation = useNavigation();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [token, setToken] = useState(null);
+  // const [token, setToken] = useState(null);
 
   const handleSubmit = async () => {
     try {
       await AsyncStorage.setItem("token", username);
-      if (username === "emmysoft" && password === "emmy123") {
+      if (username && password) {
         navigation.navigate("Welcome");
-        Toast.show({
-          type: "success",
-          text1: "Login Sucessful",
-          text2: "Welcome",
-        });
       }
     } catch (error) {
-      console.log(error);
+      console.log(error, "error logging in");
     }
   };
 
@@ -41,7 +34,7 @@ const SignIn = () => {
             <CustomInput
               placeholder="emmysoft123"
               value={username}
-              setValue={setUsername}
+              onChangeText={(text) => setUsername(text)}
             />
           </View>
           <View style={styles.passwordContainer}>
@@ -49,13 +42,22 @@ const SignIn = () => {
             <CustomInput
               placeholder="password"
               value={password}
-              setValue={setPassword}
+              onChangeText={(text) => setPassword(text)}
               secureTextEntry={true}
             />
           </View>
           <LoginButton style={styles.loginButton} onPress={handleSubmit}>
             Login
           </LoginButton>
+          <View style={styles.otherlinks}>
+            <Text
+              style={styles.otherlinkStyles}
+              onPress={() => navigation.navigate("Register")}
+            >
+              Sign Up
+            </Text>
+            <Text style={styles.otherlinkStyles}>Forgot Password?</Text>
+          </View>
         </View>
       </View>
     </>
@@ -131,5 +133,17 @@ const styles = StyleSheet.create({
     height: 50,
     backgroundColor: "#abc6c4",
     borderRadius: 8,
+  },
+  otherlinks: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 80,
+  },
+  otherlinkStyles: {
+    color: "#abc6c4",
+    fontWeight: 400,
+    fontSize: 17,
   },
 });

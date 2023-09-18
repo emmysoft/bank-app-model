@@ -1,10 +1,12 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useState } from "react";
+import { Paystack } from "react-native-paystack-webview";
 
 const Add = () => {
+
   return (
     <>
-      <View style={styles.addDetailsPage}>
+      <View style={styles.addDetailsPage} onPress={() => copyToClipBoard()}>
         <Text style={styles.acctHead}>Your details</Text>
         <View style={styles.accountNum}>
           <Text>Account Number:</Text>

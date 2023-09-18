@@ -1,10 +1,16 @@
 import { View, Text, StyleSheet, ScrollView } from "react-native";
-import React from "react";
+import { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 
 import Feature from "../Feat/Feature";
 
 const AccountDetails = ({ navigation }) => {
+  const [balance, setBalance] = useState("0.00");
+
+  const handleBalance = () => {
+    setBalance(balance);
+  };
+
   return (
     <>
       <ScrollView style={styles.scroll}>
@@ -30,7 +36,9 @@ const AccountDetails = ({ navigation }) => {
         <View style={styles.innerBox}>
           <View style={styles.acctDetails}>
             <Text style={styles.uppercontent}>Account Balance:</Text>
-            <Text style={styles.balance}>&#x20A6;900,000</Text>
+            <Text style={styles.balance} onChange={handleBalance}>
+              &#x20A6;{balance}
+            </Text>
           </View>
           <View style={styles.functions}>
             <View style={styles.funcFeat}>
@@ -49,9 +57,9 @@ const AccountDetails = ({ navigation }) => {
                 name="send"
                 size={20}
                 color={"#000"}
-                onPress={() => navigation.navigate("Transfer")}
+                onPress={() => navigation.navigate("Cash-Transfer")}
               />
-              <Text onPress={() => navigation.navigate("Transfer")}>
+              <Text onPress={() => navigation.navigate("Cash-Transfer")}>
                 Transfer
               </Text>
             </View>
@@ -103,7 +111,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    padding: 4
+    padding: 10,
   },
   icon: {
     marginTop: 20,
@@ -144,7 +152,7 @@ const styles = StyleSheet.create({
     color: "#000",
   },
   balance: {
-    fontWeight: 400,
+    fontWeight: 600,
     fontSize: 30,
     color: "#000",
   },

@@ -10,9 +10,10 @@ import SignIn from "./features/Auth/SignIn";
 import Notifications from "./features/Notifications/Notifications";
 import History from "./features/History/History";
 import Add from "./features/AddMoney/Add";
-import Transfer from "./features/Transfer/Transfer";
+import CashTransfer from "./features/CashTransfer/CashTransfer";
 import Profile from "./features/Profile/Profile";
 import Settings from "./features/Settings/Settings";
+import SignUp from "./features/Auth/SignUp";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -22,7 +23,7 @@ export function Welcome() {
     <>
       <Tab.Navigator>
         <Tab.Screen
-          name="Account"
+          name="Wallet"
           component={AccountDetails}
           options={{
             headerShown: false,
@@ -97,8 +98,13 @@ export function App() {
             options={{ headerStyle: { backgroundColor: "#abc6c4" } }}
           />
           <Stack.Screen
-            name="Transfer"
-            component={Transfer}
+            name="Cash-Transfer"
+            component={CashTransfer}
+            options={{ headerStyle: { backgroundColor: "#abc6c4" } }}
+          />
+          <Stack.Screen
+            name="Register"
+            component={SignUp}
             options={{ headerStyle: { backgroundColor: "#abc6c4" } }}
           />
         </Stack.Navigator>
