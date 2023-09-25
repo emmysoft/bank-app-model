@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
-import React, { useState } from "react";
-import { Paystack } from "react-native-paystack-webview";
+import React from "react";
+// import Rave from "react-native-rave-webview";
 
 const Add = () => {
 
@@ -16,6 +16,29 @@ const Add = () => {
           <Text>Name:</Text>
           <Text>Emmanuel Oni</Text>
         </View>
+        {/* <View style={styles.container}>
+          <Rave
+            buttonText='Pay Now'
+            raveKey='<your-api-key-here>'
+            amount={20000}
+            billingEmail='ayoshokz@gmail.com'
+            billingMobile='08101274387'
+            billingName='Oluwatobi Shokunbi'
+            ActivityIndicatorColor='green'
+            onCancel={() => this.onCancel()}
+            onSuccess={transactionRef => this.onSuccess(transactionRef)}
+            btnStyles={{
+              backgroundColor: 'green',
+              width: 100,
+              alignContent: 'center'
+            }}
+            textStyles={{ color: 'white', alignSelf: 'center' }}
+            onError={() => {
+              alert('something went wrong')
+            }}
+            txref='1234'
+          />
+        </View> */}
       </View>
     </>
   );

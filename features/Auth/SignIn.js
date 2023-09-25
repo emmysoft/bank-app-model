@@ -32,7 +32,7 @@ const SignIn = () => {
           <View style={styles.userContainer}>
             <Text style={styles.userText}>Username</Text>
             <CustomInput
-              placeholder="emmysoft123"
+              placeholder="enter your username"
               value={username}
               onChangeText={(text) => setUsername(text)}
             />
@@ -44,6 +44,7 @@ const SignIn = () => {
               value={password}
               onChangeText={(text) => setPassword(text)}
               secureTextEntry={true}
+              maxLength={8}
             />
           </View>
           <LoginButton style={styles.loginButton} onPress={handleSubmit}>
@@ -69,7 +70,7 @@ export default SignIn;
 const styles = StyleSheet.create({
   loginPage: {
     flex: 1,
-    backgroundColor: "#abc6c4",
+    backgroundColor: "#1dcf9f",
   },
   loginHeader: {
     display: "flex",
@@ -78,6 +79,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     fontSize: 24,
     fontWeight: 500,
+    color: "#fff",
     // flex: 1,
     margin: "auto",
     marginVertical: 70,
@@ -101,7 +103,7 @@ const styles = StyleSheet.create({
   loginText: {
     fontWeight: 500,
     fontSize: 28,
-    color: "#000",
+    color: "#1dcf9f",
     textAlign: "center",
   },
   userContainer: {
@@ -113,7 +115,7 @@ const styles = StyleSheet.create({
   userText: {
     fontWeight: 400,
     fontSize: 20,
-    color: "#000",
+    color: "#1dcf9f",
     marginHorizontal: 8,
   },
   passwordContainer: {
@@ -125,13 +127,13 @@ const styles = StyleSheet.create({
   passwordText: {
     fontWeight: 400,
     fontSize: 20,
-    color: "#000",
+    color: "#1dcf9f",
     marginHorizontal: 8,
   },
   loginButton: {
     width: 300,
     height: 50,
-    backgroundColor: "#abc6c4",
+    backgroundColor: "#1dcf9f",
     borderRadius: 8,
   },
   otherlinks: {
@@ -142,7 +144,7 @@ const styles = StyleSheet.create({
     gap: 80,
   },
   otherlinkStyles: {
-    color: "#abc6c4",
+    color: "#1dcf9f",
     fontWeight: 400,
     fontSize: 17,
   },

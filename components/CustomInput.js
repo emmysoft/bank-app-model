@@ -1,11 +1,12 @@
 import { StyleSheet, TextInput, View } from "react-native";
 
-const CustomInput = ({ value, onChangeText, placeholder, secureTextEntry }) => {
+const CustomInput = ({ value, onChangeText, placeholder, secureTextEntry, maxLength }) => {
   return (
     <View style={styles.textinput}>
       <TextInput
         placeholder={placeholder}
         value={value}
+        maxLength={maxLength}
         onChangeText={onChangeText}
         style={styles.input}
         secureTextEntry={secureTextEntry}
@@ -28,7 +29,7 @@ const styles = StyleSheet.create({
     width: 300,
     height: 50,
     borderWidth: 1,
-    borderColor: "#abc6c4",
+    borderColor: "#90EE90",
     borderRadius: 20,
     padding: 15,
   },

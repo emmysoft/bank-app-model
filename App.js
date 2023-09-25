@@ -7,7 +7,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import AccountDetails from "./features/AccountDetails/AccountDetails";
 import SignIn from "./features/Auth/SignIn";
-import Notifications from "./features/Notifications/Notifications";
+import UserNotifications from "./features/UserNotifications/UserNotifications";
 import History from "./features/History/History";
 import Add from "./features/AddMoney/Add";
 import CashTransfer from "./features/CashTransfer/CashTransfer";
@@ -28,20 +28,20 @@ export function Welcome() {
           options={{
             headerShown: false,
             tabBarIcon: () => (
-              <Ionicons name="wallet-outline" size={30} color={"#abc6c4"} />
+              <Ionicons name="wallet-outline" size={30} color={"#1dcf9f"} />
             ),
           }}
         />
         <Tab.Screen
           name="Notifications"
-          component={Notifications}
+          component={UserNotifications}
           options={{
-            headerStyle: { backgroundColor: "#abc6c4" },
+            headerStyle: { backgroundColor: "#1dcf9f" },
             tabBarIcon: () => (
               <Ionicons
                 name="notifications-outline"
                 size={30}
-                color={"#abc6c4"}
+                color={"#1dcf9f"}
               />
             ),
           }}
@@ -50,9 +50,9 @@ export function Welcome() {
           name="Profile"
           component={Profile}
           options={{
-            headerStyle: { backgroundColor: "#abc6c4" },
+            headerStyle: { backgroundColor: "#1dcf9f" },
             tabBarIcon: () => (
-              <Ionicons name="person-outline" size={30} color={"#abc6c4"} />
+              <Ionicons name="person-outline" size={30} color={"#1dcf9f"} />
             ),
           }}
         />
@@ -60,9 +60,9 @@ export function Welcome() {
           name="Settings"
           component={Settings}
           options={{
-            headerStyle: { backgroundColor: "#abc6c4" },
+            headerStyle: { backgroundColor: "#1dcf9f" },
             tabBarIcon: () => (
-              <Ionicons name="settings-outline" size={30} color={"#abc6c4"} />
+              <Ionicons name="settings-outline" size={30} color={"#1dcf9f"} />
             ),
           }}
         />
@@ -74,7 +74,7 @@ export function Welcome() {
 export function App() {
   return (
     <>
-      <StatusBar style="#abc6c4" />
+      <StatusBar style="#1dcf9f" />
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
@@ -90,22 +90,22 @@ export function App() {
           <Stack.Screen
             name="Add Money"
             component={Add}
-            options={{ headerStyle: { backgroundColor: "#abc6c4" } }}
+            options={{ headerStyle: { backgroundColor: "#1dcf9f" } }}
           />
           <Stack.Screen
             name="History"
             component={History}
-            options={{ headerStyle: { backgroundColor: "#abc6c4" } }}
+            options={{ headerStyle: { backgroundColor: "#1dcf9f" } }}
           />
           <Stack.Screen
             name="Cash-Transfer"
             component={CashTransfer}
-            options={{ headerStyle: { backgroundColor: "#abc6c4" } }}
+            options={{ headerStyle: { backgroundColor: "#1dcf9f" } }}
           />
           <Stack.Screen
             name="Register"
             component={SignUp}
-            options={{ headerStyle: { backgroundColor: "#abc6c4" } }}
+            options={{ headerStyle: { backgroundColor: "#1dcf9f" } }}
           />
         </Stack.Navigator>
       </NavigationContainer>

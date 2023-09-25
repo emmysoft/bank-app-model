@@ -61,7 +61,7 @@ const CashTransfer = () => {
           />
         </View>
 
-        <Pressable onPress={handleSubmit} style={{ backgroundColor: "#abc6c4", padding: 20, borderRadius: 8 }}>
+        <Pressable onPress={handleSubmit} style={{ backgroundColor: "#1dcf9f", padding: 20, borderRadius: 8 }}>
           <Text style={{ color: "#fff" }}>Transfer</Text>
         </Pressable>
 
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
   transBtn: {
     width: 300,
     height: 50,
-    backgroundColor: "#abc6c4",
+    backgroundColor: "#1dcf9f",
     borderRadius: 8,
   },
   transferForm: {
