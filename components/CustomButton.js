@@ -1,14 +1,6 @@
 import { Pressable, Text, StyleSheet } from "react-native";
 
-export const LoginButton = ({ children, onPress, style }) => {
-  return (
-    <Pressable onPress={onPress} style={style}>
-      <Text style={styles.buttonText}>{children}</Text>
-    </Pressable>
-  );
-};
-
-export const TransferButton = ({ children, onPress, style }) => {
+export const CustomButton = ({ children, onPress, style }) => {
   return (
     <Pressable onPress={onPress} style={style}>
       <Text style={styles.buttonText}>{children}</Text>

@@ -1,27 +1,54 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Alert, StyleSheet, Text, View } from "react-native";
 import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+// import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import CustomInput from "../../components/CustomInput";
-import { LoginButton } from "../../components/CustomButton";
+import { CustomButton } from "../../components/CustomButton";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { FIREBASE_AUTH } from "../../firebaseconfig";
 
 const SignIn = () => {
+  const auth = FIREBASE_AUTH;
   const navigation = useNavigation();
-  const [username, setUsername] = useState("");
+
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   // const [token, setToken] = useState(null);
 
-  const handleSubmit = async () => {
+  // const handleSubmit = async () => {
+  //   try {
+  //     await AsyncStorage.setItem("token", email);
+  //     if (email && password) {
+  //       navigation.navigate("Welcome");
+  //     }
+  //   } catch (error) {
+  //     console.log(error, "error logging in");
+  //   }
+  // };
+
+  //firebase auth
+
+  const handleLogin = async () => {
     try {
-      await AsyncStorage.setItem("token", username);
-      if (username && password) {
-        navigation.navigate("Welcome");
-      }
+      const response = await signInWithEmailAndPassword(auth, email, password);
+      // console.log(response);
+      Alert.alert("Login Successful" + response)
+      navigation.navigate("Welcome")
     } catch (error) {
-      console.log(error, "error logging in");
+      // console.log(error)
+      Alert.alert("Wrong email and password" + error.msg)
+    } finally {
+      setLoading(false);
     }
-  };
+  }
+
+  // const handleForgotPassword = async () => {
+  //   try {
+  //     const res = await passw
+  //   }
+  // }
 
   return (
     <>
@@ -30,26 +57,26 @@ const SignIn = () => {
         <View style={styles.loginContainer}>
           <Text style={styles.loginText}>Login</Text>
           <View style={styles.userContainer}>
-            <Text style={styles.userText}>Username</Text>
+            <Text style={styles.userText}>Email</Text>
             <CustomInput
-              placeholder="enter your username"
-              value={username}
-              onChangeText={(text) => setUsername(text)}
+              placeholder="Email"
+              value={email}
+              onChangeText={(text) => setEmail(text)}
             />
           </View>
           <View style={styles.passwordContainer}>
             <Text style={styles.passwordText}>Password</Text>
             <CustomInput
-              placeholder="password"
+              placeholder="Password"
               value={password}
               onChangeText={(text) => setPassword(text)}
               secureTextEntry={true}
               maxLength={8}
             />
           </View>
-          <LoginButton style={styles.loginButton} onPress={handleSubmit}>
+          <CustomButton style={styles.loginButton} onPress={handleLogin}>
             Login
-          </LoginButton>
+          </CustomButton>
           <View style={styles.otherlinks}>
             <Text
               style={styles.otherlinkStyles}
@@ -90,7 +117,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     border: "2px solid #fff",
     padding: 24,
-    // width: "60%",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -98,7 +124,6 @@ const styles = StyleSheet.create({
     gap: 24,
     marginHorizontal: 20,
     marginVertical: 80,
-    // margin: "auto",
   },
   loginText: {
     fontWeight: 500,
