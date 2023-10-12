@@ -4,6 +4,7 @@ import Toast from "react-native-root-toast";
 
 import CustomInput from "../../components/CustomInput";
 import { Paystack } from "react-native-paystack-webview";
+import { API_KEY, PAYSTACK_API_KEY } from "../../util/api";
 
 const CashTransfer = () => {
   // const [amount, setAmount] = useState("");
@@ -61,14 +62,14 @@ const CashTransfer = () => {
           />
         </View>
 
-        <Pressable onPress={handleSubmit} style={{ backgroundColor: "#1dcf9f", padding: 20, borderRadius: 8 }}>
+        <Pressable onPress={handleSubmit} style={{ backgroundColor: "#0c104f", padding: 20, borderRadius: 8 }}>
           <Text style={{ color: "#fff" }}>Transfer</Text>
         </Pressable>
 
         {pay && (
           <View style={{ flex: 1 }}>
             <Paystack
-              paystackKey="pk_test_852ce2f5227059c6713730f583faa1973f2dc514"
+              paystackKey={PAYSTACK_API_KEY}
               amount={billingDetail.amount}
               billingEmail={billingDetail.billingEmail}
               billingMobile={billingDetail.billingMobile}
@@ -114,7 +115,7 @@ const styles = StyleSheet.create({
   transBtn: {
     width: 300,
     height: 50,
-    backgroundColor: "#1dcf9f",
+    backgroundColor: "#0c104f",
     borderRadius: 8,
   },
   transferForm: {

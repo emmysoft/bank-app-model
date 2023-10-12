@@ -1,13 +1,26 @@
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { View, Text, StyleSheet, Alert } from "react-native";
 import { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
+// import WalletsAfrica from "wallets-africa-api";
 
 import Feature from "../Feat/Feature";
+import { useDispatch, useSelector } from "react-redux";
+import { selectLogin, setLogout } from "../../redux/authSlice";
+import { FIREBASE_AUTH } from "../../firebaseconfig";
+// import { WALLETS_PUB_KEY, WALLETS_SEC_KEY } from "../../util/api";
 
 const AccountDetails = ({ navigation }) => {
+  const auth = FIREBASE_AUTH;
   const [balance, setBalance] = useState("0.00");
 
-  const handleBalance = () => {
+  const dispatch = useDispatch();
+  // const user = useSelector(selectLogin);
+
+  const handleLogout = () => {
+    dispatch(setLogout())
+  }
+
+  const handleBalance = async () => {
     setBalance(balance);
   };
 
@@ -15,14 +28,14 @@ const AccountDetails = ({ navigation }) => {
     <>
       <View style={styles.scroll}>
         <View style={styles.header}>
-          <View>
-            <Text style={styles.title} onPress={() => navigation.navigate("Profile")}>Hello Emmanuel</Text>
+          <View style={styles.profilename}>
+            <Text style={styles.title} onPress={() => navigation.navigate("Profile")}>Hello, {auth.currentUser?.displayName}</Text>
           </View>
           <View style={styles.headIcon}>
             <Ionicons
               name="notifications"
               size={24}
-              color={"#1dcf9f"}
+              color={"#0c104f"}
               style={styles.icon}
               onPress={() => navigation.navigate("Notifications")}
             />
@@ -30,7 +43,7 @@ const AccountDetails = ({ navigation }) => {
               name="log-out"
               size={24}
               color={"#ff0000"}
-              onPress={() => navigation.navigate("Welcome to Nuda Bank")}
+              onPress={() => { navigation.navigate("Welcome to Nuda Bank"), handleLogout }}
               style={styles.logoutButn}
             />
           </View>
@@ -59,9 +72,9 @@ const AccountDetails = ({ navigation }) => {
                 name="send"
                 size={20}
                 color={"#fff"}
-                onPress={() => navigation.navigate("Cash-Transfer")}
+                onPress={() => navigation.navigate("Cash Transfer")}
               />
-              <Text onPress={() => navigation.navigate("Cash-Transfer")} style={{ color: "#fff" }}>
+              <Text onPress={() => navigation.navigate("Cash Transfer")} style={{ color: "#fff" }}>
                 Transfer
               </Text>
             </View>
@@ -132,9 +145,15 @@ const styles = StyleSheet.create({
     // marginBottom: 40,
     // marginLeft: 20,
   },
+  profilename: {
+    width: "50%",
+    display: 'flex',
+    justifyContent: "flex-start",
+    alignItems: 'flex-start',
+  },
   accountBox: {
-    backgroundColor: "#1dcf9f",
-    border: "1px solid #1dcf9f",
+    backgroundColor: "#0c104f",
+    border: "1px solid #0c104f",
     display: "flex",
     justifyItems: "center",
     alignItems: "center",

@@ -5,73 +5,68 @@ import { useNavigation } from "@react-navigation/native";
 
 import CustomInput from "../../components/CustomInput";
 import { CustomButton } from "../../components/CustomButton";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { sendEmailVerification, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { FIREBASE_AUTH } from "../../firebaseconfig";
+import { setLogin, setSignUp } from "../../redux/authSlice";
+import { useDispatch } from "react-redux";
 
 const SignIn = () => {
+
   const auth = FIREBASE_AUTH;
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
+  const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  // const [token, setToken] = useState(null);
-
-  // const handleSubmit = async () => {
-  //   try {
-  //     await AsyncStorage.setItem("token", email);
-  //     if (email && password) {
-  //       navigation.navigate("Welcome");
-  //     }
-  //   } catch (error) {
-  //     console.log(error, "error logging in");
-  //   }
-  // };
 
   //firebase auth
 
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    dispatch(setLogin({
+      userName: userName,
+      email: email,
+      loggedIn: true
+    }))
     try {
       const response = await signInWithEmailAndPassword(auth, email, password);
-      // console.log(response);
-      Alert.alert("Login Successful" + response)
+      await sendEmailVerification(auth.currentUser).catch((err) => console.log(err));
+      await updateProfile(auth.currentUser, { displayName: userName }).catch((err) => console.log(err))
+      console.log(response);
+      Alert.alert("Login Successful")
       navigation.navigate("Welcome")
     } catch (error) {
-      // console.log(error)
-      Alert.alert("Wrong email and password" + error.msg)
+      console.log(error)
+      Alert.alert("Wrong username/email and password")
     } finally {
       setLoading(false);
     }
   }
 
-  // const handleForgotPassword = async () => {
-  //   try {
-  //     const res = await passw
-  //   }
-  // }
-
   return (
     <>
       <View style={styles.loginPage}>
-        <Text style={styles.loginHeader}>Welcome To Nuda Bank</Text>
+        <Text style={styles.loginHeader}>Welcome to NuelPay</Text>
         <View style={styles.loginContainer}>
           <Text style={styles.loginText}>Login</Text>
           <View style={styles.userContainer}>
             <Text style={styles.userText}>Email</Text>
             <CustomInput
-              placeholder="Email"
+              placeholder="email"
               value={email}
-              onChangeText={(text) => setEmail(text)}
+              onChangeText={(text) => { setEmail(text) }}
             />
           </View>
           <View style={styles.passwordContainer}>
             <Text style={styles.passwordText}>Password</Text>
             <CustomInput
-              placeholder="Password"
+              placeholder="password"
               value={password}
               onChangeText={(text) => setPassword(text)}
               secureTextEntry={true}
-              maxLength={8}
+              maxLength={10}
             />
           </View>
           <CustomButton style={styles.loginButton} onPress={handleLogin}>
@@ -97,7 +92,7 @@ export default SignIn;
 const styles = StyleSheet.create({
   loginPage: {
     flex: 1,
-    backgroundColor: "#1dcf9f",
+    backgroundColor: "#0c104f",
   },
   loginHeader: {
     display: "flex",
@@ -111,6 +106,7 @@ const styles = StyleSheet.create({
     margin: "auto",
     marginVertical: 70,
     marginHorizontal: 60,
+    textAlign: 'center',
   },
   loginContainer: {
     borderRadius: 10,
@@ -123,12 +119,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 24,
     marginHorizontal: 20,
-    marginVertical: 80,
+    // marginVertical: 20,
   },
   loginText: {
     fontWeight: 500,
     fontSize: 28,
-    color: "#1dcf9f",
+    color: "#0c104f",
     textAlign: "center",
   },
   userContainer: {
@@ -140,7 +136,7 @@ const styles = StyleSheet.create({
   userText: {
     fontWeight: 400,
     fontSize: 20,
-    color: "#1dcf9f",
+    color: "#0c104f",
     marginHorizontal: 8,
   },
   passwordContainer: {
@@ -152,13 +148,13 @@ const styles = StyleSheet.create({
   passwordText: {
     fontWeight: 400,
     fontSize: 20,
-    color: "#1dcf9f",
+    color: "#0c104f",
     marginHorizontal: 8,
   },
   loginButton: {
     width: 300,
     height: 50,
-    backgroundColor: "#1dcf9f",
+    backgroundColor: "#0c104f",
     borderRadius: 8,
   },
   otherlinks: {
@@ -169,7 +165,7 @@ const styles = StyleSheet.create({
     gap: 80,
   },
   otherlinkStyles: {
-    color: "#1dcf9f",
+    color: "#0c104f",
     fontWeight: 400,
     fontSize: 17,
   },

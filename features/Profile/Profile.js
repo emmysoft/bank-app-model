@@ -1,8 +1,13 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
+import { useSelector } from "react-redux";
+import { selectLogin } from "../../redux/authSlice";
 
 const Profile = () => {
+
+  const user = useSelector(selectLogin);
+
   return (
     <>
       <View style={styles.container}>
@@ -11,7 +16,7 @@ const Profile = () => {
           <View style={styles.details}>
             <View style={styles.name}>
               <Ionicons name="person-add-outline" size={20} color={"grey"} />
-              <Text>Emmanuel Oni</Text>
+              <Text>{user.email}</Text>
             </View>
             <View style={styles.sex}>
               <Ionicons name="person" size={20} color={"grey"} />

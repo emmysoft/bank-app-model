@@ -14,6 +14,8 @@ import CashTransfer from "./features/CashTransfer/CashTransfer";
 import Profile from "./features/Profile/Profile";
 import Settings from "./features/Settings/Settings";
 import SignUp from "./features/Auth/SignUp";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -28,7 +30,7 @@ export function Welcome() {
           options={{
             headerShown: false,
             tabBarIcon: () => (
-              <Ionicons name="wallet-outline" size={30} color={"#1dcf9f"} />
+              <Ionicons name="wallet-outline" size={30} color={"#0c104f"} />
             ),
           }}
         />
@@ -36,23 +38,26 @@ export function Welcome() {
           name="Notifications"
           component={UserNotifications}
           options={{
-            headerStyle: { backgroundColor: "#1dcf9f" },
+            headerTitleStyle: { color: "#fff" },
+            headerStyle: { backgroundColor: "#0c104f" },
             tabBarIcon: () => (
               <Ionicons
                 name="notifications-outline"
                 size={30}
-                color={"#1dcf9f"}
+                color={"#0c104f"}
               />
             ),
+            headerTitleStyle: { color: "#fff" }
           }}
         />
         <Tab.Screen
           name="Profile"
           component={Profile}
           options={{
-            headerStyle: { backgroundColor: "#1dcf9f" },
+            headerTitleStyle: { color: "#fff" },
+            headerStyle: { backgroundColor: "#0c104f" },
             tabBarIcon: () => (
-              <Ionicons name="person-outline" size={30} color={"#1dcf9f"} />
+              <Ionicons name="person-outline" size={30} color={"#0c104f"} />
             ),
           }}
         />
@@ -60,9 +65,10 @@ export function Welcome() {
           name="Settings"
           component={Settings}
           options={{
-            headerStyle: { backgroundColor: "#1dcf9f" },
+            headerTitleStyle: { color: "#fff" },
+            headerStyle: { backgroundColor: "#0c104f" },
             tabBarIcon: () => (
-              <Ionicons name="settings-outline" size={30} color={"#1dcf9f"} />
+              <Ionicons name="settings-outline" size={30} color={"#0c104f"} />
             ),
           }}
         />
@@ -74,41 +80,43 @@ export function Welcome() {
 export function App() {
   return (
     <>
-      <StatusBar style="#1dcf9f" />
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Welcome to Nuda Bank"
-            component={SignIn}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Welcome"
-            component={Welcome}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Add Money"
-            component={Add}
-            options={{ headerStyle: { backgroundColor: "#1dcf9f" } }}
-          />
-          <Stack.Screen
-            name="History"
-            component={History}
-            options={{ headerStyle: { backgroundColor: "#1dcf9f" } }}
-          />
-          <Stack.Screen
-            name="Cash-Transfer"
-            component={CashTransfer}
-            options={{ headerStyle: { backgroundColor: "#1dcf9f" } }}
-          />
-          <Stack.Screen
-            name="Register"
-            component={SignUp}
-            options={{ headerStyle: { backgroundColor: "#1dcf9f" } }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <StatusBar style="#0c104f" />
+      <Provider store={store}>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+              name="Welcome to Nuda Bank"
+              component={SignIn}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Welcome"
+              component={Welcome}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Add Money"
+              component={Add}
+              options={{ headerStyle: { backgroundColor: "#0c104f" }, headerTitleStyle: { color: "#fff" }, headerTintColor: "#fff" }}
+            />
+            <Stack.Screen
+              name="History"
+              component={History}
+              options={{ headerStyle: { backgroundColor: "#0c104f" }, headerTitleStyle: { color: "#fff" }, headerTintColor: "#fff" }}
+            />
+            <Stack.Screen
+              name="Cash Transfer"
+              component={CashTransfer}
+              options={{ headerStyle: { backgroundColor: "#0c104f" }, headerTitleStyle: { color: "#fff" }, headerTintColor: "#fff" }}
+            />
+            <Stack.Screen
+              name="Register"
+              component={SignUp}
+              options={{ headerStyle: { backgroundColor: "#0c104f" }, headerTitleStyle: { color: "#fff" }, headerTintColor: '#fff' }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </Provider>
     </>
   );
 }

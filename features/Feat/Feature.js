@@ -42,8 +42,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 40,
     borderRadius: 10,
-    backgroundColor: "#1dcf9f",
-    border: "1px solid #1dcf9f",
+    backgroundColor: "#0c104f",
+    border: "1px solid #0c104f",
     padding: 50,
   },
   funcFeat: {

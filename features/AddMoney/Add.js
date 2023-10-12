@@ -1,8 +1,11 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-// import Rave from "react-native-rave-webview";
+import { useSelector } from "react-redux";
+import { selectLogin } from "../../redux/authSlice";
 
 const Add = () => {
+
+  const user = useSelector(selectLogin);
 
   return (
     <>
@@ -14,31 +17,8 @@ const Add = () => {
         </View>
         <View style={styles.accountName}>
           <Text>Name:</Text>
-          <Text>Emmanuel Oni</Text>
+          <Text>{user.userName}</Text>
         </View>
-        {/* <View style={styles.container}>
-          <Rave
-            buttonText='Pay Now'
-            raveKey='<your-api-key-here>'
-            amount={20000}
-            billingEmail='ayoshokz@gmail.com'
-            billingMobile='08101274387'
-            billingName='Oluwatobi Shokunbi'
-            ActivityIndicatorColor='green'
-            onCancel={() => this.onCancel()}
-            onSuccess={transactionRef => this.onSuccess(transactionRef)}
-            btnStyles={{
-              backgroundColor: 'green',
-              width: 100,
-              alignContent: 'center'
-            }}
-            textStyles={{ color: 'white', alignSelf: 'center' }}
-            onError={() => {
-              alert('something went wrong')
-            }}
-            txref='1234'
-          />
-        </View> */}
       </View>
     </>
   );
