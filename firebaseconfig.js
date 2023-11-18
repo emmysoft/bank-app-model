@@ -2,12 +2,14 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
+import { FIREBASE_API } from "./util/api";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyDNx2SLa8o8NEKaBmGBK3GHku5WjCtKoj8",
+    apiKey: FIREBASE_API,
     authDomain: "nudabank.firebaseapp.com",
     projectId: "nudabank",
     storageBucket: "nudabank.appspot.com",

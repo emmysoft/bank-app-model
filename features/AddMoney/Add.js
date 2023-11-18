@@ -1,11 +1,13 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { useSelector } from "react-redux";
-import { selectLogin } from "../../redux/authSlice";
+// import { useSelector } from "react-redux";
+// import { selectLogin } from "../../redux/authSlice";
+import { FIREBASE_APP, FIREBASE_AUTH } from "../../firebaseconfig";
 
 const Add = () => {
 
-  const user = useSelector(selectLogin);
+  const auth = FIREBASE_AUTH;
+  // const user = useSelector(selectLogin);
 
   return (
     <>
@@ -17,7 +19,7 @@ const Add = () => {
         </View>
         <View style={styles.accountName}>
           <Text>Name:</Text>
-          <Text>{user.userName}</Text>
+          <Text>{auth.currentUser?.displayName}</Text>
         </View>
       </View>
     </>

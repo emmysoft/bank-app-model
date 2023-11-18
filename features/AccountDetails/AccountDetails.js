@@ -35,7 +35,7 @@ const AccountDetails = ({ navigation }) => {
             <Ionicons
               name="notifications"
               size={24}
-              color={"#0c104f"}
+              color={"#0357ee"}
               style={styles.icon}
               onPress={() => navigation.navigate("Notifications")}
             />
@@ -139,8 +139,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     fontWeight: 500,
-    fontSize: 25,
+    fontSize: 20,
     color: "#000",
+    width: "100%",
     // marginTop: 60,
     // marginBottom: 40,
     // marginLeft: 20,
@@ -152,8 +153,8 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
   },
   accountBox: {
-    backgroundColor: "#0c104f",
-    border: "1px solid #0c104f",
+    backgroundColor: "#0357ee",
+    border: "1px solid #0357ee",
     display: "flex",
     justifyItems: "center",
     alignItems: "center",

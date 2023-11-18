@@ -1,6 +1,7 @@
-import { Alert, StyleSheet, Text, View } from "react-native";
+import { Alert, StyleSheet, Text, View, Pressable } from "react-native";
 import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
+import { Ionicons } from "@expo/vector-icons";
 // import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import CustomInput from "../../components/CustomInput";
@@ -20,6 +21,12 @@ const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+  const handleToggle = () => {
+    setIsPasswordVisible(!isPasswordVisible);
+  }
+
 
   //firebase auth
 
@@ -29,7 +36,7 @@ const SignIn = () => {
       userName: userName,
       email: email,
       loggedIn: true
-    }))
+    }));
     try {
       const response = await signInWithEmailAndPassword(auth, email, password);
       await sendEmailVerification(auth.currentUser).catch((err) => console.log(err));
@@ -65,9 +72,12 @@ const SignIn = () => {
               placeholder="password"
               value={password}
               onChangeText={(text) => setPassword(text)}
-              secureTextEntry={true}
+              secureTextEntry={!isPasswordVisible}
               maxLength={10}
             />
+            <Pressable onPress={handleToggle} style={{ position: 'absolute', right: 30, top: 50 }}>
+                <Ionicons name={isPasswordVisible ? "eye-off" : "eye"} size={24} color={"#0357ee"} />
+            </Pressable>
           </View>
           <CustomButton style={styles.loginButton} onPress={handleLogin}>
             Login
@@ -92,7 +102,7 @@ export default SignIn;
 const styles = StyleSheet.create({
   loginPage: {
     flex: 1,
-    backgroundColor: "#0c104f",
+    backgroundColor: "#0357ee",
   },
   loginHeader: {
     display: "flex",
@@ -113,9 +123,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     border: "2px solid #fff",
     padding: 24,
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
+    // display: "flex",
+    // flexDirection: "column",
+    // justifyContent: "center",
     alignItems: "center",
     gap: 24,
     marginHorizontal: 20,
@@ -124,7 +134,7 @@ const styles = StyleSheet.create({
   loginText: {
     fontWeight: 500,
     fontSize: 28,
-    color: "#0c104f",
+    color: "#0357ee",
     textAlign: "center",
   },
   userContainer: {
@@ -136,7 +146,7 @@ const styles = StyleSheet.create({
   userText: {
     fontWeight: 400,
     fontSize: 20,
-    color: "#0c104f",
+    color: "#0357ee",
     marginHorizontal: 8,
   },
   passwordContainer: {
@@ -148,13 +158,13 @@ const styles = StyleSheet.create({
   passwordText: {
     fontWeight: 400,
     fontSize: 20,
-    color: "#0c104f",
+    color: "#0357ee",
     marginHorizontal: 8,
   },
   loginButton: {
     width: 300,
     height: 50,
-    backgroundColor: "#0c104f",
+    backgroundColor: "#0357ee",
     borderRadius: 8,
   },
   otherlinks: {
@@ -165,7 +175,7 @@ const styles = StyleSheet.create({
     gap: 80,
   },
   otherlinkStyles: {
-    color: "#0c104f",
+    color: "#0357ee",
     fontWeight: 400,
     fontSize: 17,
   },

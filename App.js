@@ -30,7 +30,7 @@ export function Welcome() {
           options={{
             headerShown: false,
             tabBarIcon: () => (
-              <Ionicons name="wallet-outline" size={30} color={"#0c104f"} />
+              <Ionicons name="wallet-outline" size={30} color={"#0357ee"} />
             ),
           }}
         />
@@ -39,12 +39,12 @@ export function Welcome() {
           component={UserNotifications}
           options={{
             headerTitleStyle: { color: "#fff" },
-            headerStyle: { backgroundColor: "#0c104f" },
+            headerStyle: { backgroundColor: "#0357ee" },
             tabBarIcon: () => (
               <Ionicons
                 name="notifications-outline"
                 size={30}
-                color={"#0c104f"}
+                color={"#0357ee"}
               />
             ),
             headerTitleStyle: { color: "#fff" }
@@ -55,9 +55,9 @@ export function Welcome() {
           component={Profile}
           options={{
             headerTitleStyle: { color: "#fff" },
-            headerStyle: { backgroundColor: "#0c104f" },
+            headerStyle: { backgroundColor: "#0357ee" },
             tabBarIcon: () => (
-              <Ionicons name="person-outline" size={30} color={"#0c104f"} />
+              <Ionicons name="person-outline" size={30} color={"#0357ee"} />
             ),
           }}
         />
@@ -66,9 +66,9 @@ export function Welcome() {
           component={Settings}
           options={{
             headerTitleStyle: { color: "#fff" },
-            headerStyle: { backgroundColor: "#0c104f" },
+            headerStyle: { backgroundColor: "#0357ee" },
             tabBarIcon: () => (
-              <Ionicons name="settings-outline" size={30} color={"#0c104f"} />
+              <Ionicons name="settings-outline" size={30} color={"#0357ee"} />
             ),
           }}
         />
@@ -80,7 +80,7 @@ export function Welcome() {
 export function App() {
   return (
     <>
-      <StatusBar style="#0c104f" />
+      <StatusBar style="#0357ee" />
       <Provider store={store}>
         <NavigationContainer>
           <Stack.Navigator>
@@ -97,22 +97,22 @@ export function App() {
             <Stack.Screen
               name="Add Money"
               component={Add}
-              options={{ headerStyle: { backgroundColor: "#0c104f" }, headerTitleStyle: { color: "#fff" }, headerTintColor: "#fff" }}
+              options={{ headerStyle: { backgroundColor: "#0357ee" }, headerTitleStyle: { color: "#fff" }, headerTintColor: "#fff" }}
             />
             <Stack.Screen
               name="History"
               component={History}
-              options={{ headerStyle: { backgroundColor: "#0c104f" }, headerTitleStyle: { color: "#fff" }, headerTintColor: "#fff" }}
+              options={{ headerStyle: { backgroundColor: "#0357ee" }, headerTitleStyle: { color: "#fff" }, headerTintColor: "#fff" }}
             />
             <Stack.Screen
               name="Cash Transfer"
               component={CashTransfer}
-              options={{ headerStyle: { backgroundColor: "#0c104f" }, headerTitleStyle: { color: "#fff" }, headerTintColor: "#fff" }}
+              options={{ headerStyle: { backgroundColor: "#0357ee" }, headerTitleStyle: { color: "#fff" }, headerTintColor: "#fff" }}
             />
             <Stack.Screen
               name="Register"
               component={SignUp}
-              options={{ headerStyle: { backgroundColor: "#0c104f" }, headerTitleStyle: { color: "#fff" }, headerTintColor: '#fff' }}
+              options={{ headerStyle: { backgroundColor: "#0357ee" }, headerTitleStyle: { color: "#fff" }, headerTintColor: '#fff' }}
             />
           </Stack.Navigator>
         </NavigationContainer>
