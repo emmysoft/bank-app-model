@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Alert } from "react-native";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Ionicons } from "@expo/vector-icons";
 // import WalletsAfrica from "wallets-africa-api";
 
@@ -11,10 +11,10 @@ import { FIREBASE_AUTH } from "../../firebaseconfig";
 
 const AccountDetails = ({ navigation }) => {
   const auth = FIREBASE_AUTH;
-  const [balance, setBalance] = useState("0.00");
+  const [balance, setBalance] = useState("1,000.00");
 
   const dispatch = useDispatch();
-  // const user = useSelector(selectLogin);
+  const user = useSelector(selectLogin);
 
   const handleLogout = () => {
     dispatch(setLogout())
@@ -23,6 +23,22 @@ const AccountDetails = ({ navigation }) => {
   const handleBalance = async () => {
     setBalance(balance);
   };
+
+
+  // useEffect(() => {
+  //   const unsubscribe = auth.onAuthStateChanged((auth) => {
+  //     // If the user is authenticated, update the Redux store
+  //     if (auth) {
+  //       dispatch(setLogin(auth));
+  //     } else {
+  //       // If the user is not authenticated, you might want to clear the user state
+  //       dispatch(setLogin(null));
+  //     }
+  //   });
+
+  //   // Clean up the subscription when the component unmounts
+  //   return () => unsubscribe();
+  // }, [dispatch]);
 
   return (
     <>
@@ -136,8 +152,8 @@ const styles = StyleSheet.create({
   title: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
     fontWeight: 500,
     fontSize: 20,
     color: "#000",

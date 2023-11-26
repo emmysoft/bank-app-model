@@ -38,7 +38,7 @@ const SignUp = () => {
     try {
       const response = await createUserWithEmailAndPassword(auth, email, password);
       await sendEmailVerification(auth.currentUser).catch((err) => console.log(err));
-      await updateProfile(auth.currentUser, { displayName: displayName }).catch((err) => console.log(err))
+      await updateProfile(auth.currentUser, { displayName: fullName }).catch((err) => console.log(err))
       console.log(response);
       Alert.alert("We are glad you joined us" + response)
       navigation.navigate("Welcome")
@@ -62,7 +62,7 @@ const SignUp = () => {
               <CustomInput placeholder="displayName" value={displayName} onChangeText={(text) => setDisplayName(text)} />
               <CustomInput placeholder="email" value={email} onChangeText={(text) => setEmail(text)} />
               {/* <View style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center", }}> */}
-                <CustomInput placeholder="password" value={password} onChangeText={(text) => setPassword(text)} secureTextEntry={!isPasswordVisible} maxLength={10} />
+                <CustomInput placeholder="password" value={password} onChangeText={(text) => setPassword(text)} secureTextEntry={!isPasswordVisible} maxLength={15} />
                 <Pressable onPress={handleToggle} style={{ position: 'absolute', right: 30, top: 275 }}>
                   <Ionicons name={isPasswordVisible ? "eye-off" : "eye"} size={24} color={"#0357ee"} />
                 </Pressable>

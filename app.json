@@ -3,7 +3,7 @@
     "name": "design",
     "slug": "design",
     "version": "1.0.0",
-    "orientation": "portrait",
+    "orientation": "default",
     "icon": "./assets/myLogo.png",
     "userInterfaceStyle": "light",
     "splash": {

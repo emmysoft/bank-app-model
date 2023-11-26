@@ -5,9 +5,11 @@ import Toast from "react-native-root-toast";
 import CustomInput from "../../components/CustomInput";
 import { Paystack } from "react-native-paystack-webview";
 import { API_KEY, PAYSTACK_API_KEY } from "../../util/api";
+import { CustomButton } from "../../components/CustomButton";
 
 const CashTransfer = () => {
-  // const [amount, setAmount] = useState("");
+  // const [balance, setBalance] = useState("1000.00")
+  // const [newBalance, setNewBalance] = useState();
 
   const [pay, setPay] = useState(false);
   const [billingDetail, setBillingDetail] = useState({
@@ -16,6 +18,17 @@ const CashTransfer = () => {
     billingMobile: "",
     amount: "",
   });
+
+  // const handleUpdateBalance = () => {
+  //   const numericValue = parseFloat(setNewBalance);
+  //   if (isNaN(numericValue)) {
+  //     alert('enter a valid number');
+  //     return;
+  //   }
+  //   setBalance((prevBalance) => prevBalance + numericValue);
+
+  //   setNewBalance("");
+  // }
 
   const handleOnchange = (text, input) => {
     setBillingDetail((prevState) => ({ ...prevState, [input]: text }));
@@ -62,9 +75,9 @@ const CashTransfer = () => {
           />
         </View>
 
-        <Pressable onPress={handleSubmit} style={{ backgroundColor: "#0357ee", padding: 20, borderRadius: 8 }}>
-          <Text style={{ color: "#fff" }}>Transfer</Text>
-        </Pressable>
+        <CustomButton onPress={handleSubmit} style={styles.transferButton}>
+          Transfer
+        </CustomButton>
 
         {pay && (
           <View style={{ flex: 1 }}>
@@ -113,11 +126,29 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 10,
   },
-  transBtn: {
-    width: 300,
-    height: 50,
+  // transBtn: {
+  //   width: 300,
+  //   height: 50,
+  //   backgroundColor: "#0357ee",
+  //   borderRadius: 8,
+  // },
+  transferButton: {
+    color: "#fff",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
+    paddingHorizontal: 100,
+    paddingVertical: 10,
+    marginVertical: 30,
+    borderRadius: 15,
+    borderWidth: 1,
+    borderColor: "#0357ee",
+    shadowColor: "#0357ee",
+    shadowOffset: 1,
+    shadowOpacity: 1,
     backgroundColor: "#0357ee",
-    borderRadius: 8,
   },
   transferForm: {
     display: "flex",
