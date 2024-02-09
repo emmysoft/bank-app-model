@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Alert } from "react-native";
+import { View, Text, StyleSheet, Alert, StatusBar } from "react-native";
 import { useState, useEffect } from "react";
 import { Ionicons } from "@expo/vector-icons";
 // import WalletsAfrica from "wallets-africa-api";
@@ -6,13 +6,26 @@ import { Ionicons } from "@expo/vector-icons";
 import Feature from "../Feat/Feature";
 import { useDispatch, useSelector } from "react-redux";
 import { selectLogin, setLogout } from "../../redux/authSlice";
-import { FIREBASE_AUTH } from "../../firebaseconfig";
+import { FIREBASE_STORE } from "../../firebaseconfig";
+// import { FIREBASE_AUTH, FIREBASE_STORE } from "../../firebaseconfig";
 // import { WALLETS_PUB_KEY, WALLETS_SEC_KEY } from "../../util/api";
 
-const AccountDetails = ({ navigation }) => {
-  const auth = FIREBASE_AUTH;
+
+const fetchUser = async (uid) => {
+  const doc = await db.collection('users').doc(uid).get();
+  return doc.data();
+}
+
+const AccountDetails = ({ navigation, uid }) => {
+
+  //handle balance cash state
   const [balance, setBalance] = useState("1,000.00");
 
+  const handleBalance = async () => {
+    setBalance(balance);
+  };
+
+  //handle login and logout state from redux toolkit
   const dispatch = useDispatch();
   const user = useSelector(selectLogin);
 
@@ -20,32 +33,24 @@ const AccountDetails = ({ navigation }) => {
     dispatch(setLogout())
   }
 
-  const handleBalance = async () => {
-    setBalance(balance);
-  };
+  //handle user data from database
+  const [userName, setUserName] = useState(null);
 
-
-  // useEffect(() => {
-  //   const unsubscribe = auth.onAuthStateChanged((auth) => {
-  //     // If the user is authenticated, update the Redux store
-  //     if (auth) {
-  //       dispatch(setLogin(auth));
-  //     } else {
-  //       // If the user is not authenticated, you might want to clear the user state
-  //       dispatch(setLogin(null));
-  //     }
-  //   });
-
-  //   // Clean up the subscription when the component unmounts
-  //   return () => unsubscribe();
-  // }, [dispatch]);
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const data = await fetchUser(uid);
+      setUserName(data);
+    };
+    fetchUserData();
+  }, [uid]);
 
   return (
     <>
       <View style={styles.scroll}>
+        <StatusBar style="dark" barStyle={"dark-content"} />
         <View style={styles.header}>
           <View style={styles.profilename}>
-            <Text style={styles.title} onPress={() => navigation.navigate("Profile")}>Hello, {auth.currentUser?.displayName}</Text>
+            {userName && <Text style={styles.title} onPress={() => navigation.navigate("Profile")}>Hello, {userName.userName} </Text>}
           </View>
           <View style={styles.headIcon}>
             <Ionicons
@@ -157,10 +162,8 @@ const styles = StyleSheet.create({
     fontWeight: 500,
     fontSize: 20,
     color: "#000",
-    width: "100%",
-    // marginTop: 60,
-    // marginBottom: 40,
-    // marginLeft: 20,
+    width: "200%",
+    height: "auto",
   },
   profilename: {
     width: "50%",

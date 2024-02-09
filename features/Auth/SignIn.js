@@ -1,4 +1,4 @@
-import { Alert, StyleSheet, Text, View, Pressable, Dimensions } from "react-native";
+import { Alert, StyleSheet, Text, View, Pressable, Dimensions, ActivityIndicator } from "react-native";
 import { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
@@ -11,6 +11,7 @@ import { FIREBASE_AUTH } from "../../firebaseconfig";
 // import { GoogleSignin, GoogleSigninButton } from '@react-native-community/google-signin';
 import { selectLogin, setLogin, setSignUp } from "../../redux/authSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { SafeAreaView } from "react-native-safe-area-context";
 // import { PAYSTACK_API_KEY } from "../../util/api";
 
 const SignIn = () => {
@@ -20,30 +21,21 @@ const SignIn = () => {
   const dispatch = useDispatch();
   // const user = useSelector(selectLogin);
 
-  const windowDimensions = Dimensions.get('window');
-  const screenDimensions = Dimensions.get('screen');
-
-  const [dimensions, setDimensions] = useState({
-    window: windowDimensions,
-    screen: screenDimensions,
-  });
-
-  useEffect(() => {
-    const subscription = Dimensions.addEventListener(
-      'change',
-      ({window, screen}) => {
-        setDimensions({window, screen});
-      },
-    );
-    return () => subscription?.remove();
-  });
-
-  const [fullName, setFullName] = useState("");
-  const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  //function for handling loading new screen with ActivityIndicator
+  const handleLoading = async () => {
+    setIsLoading(true);
+    await new Promise((resolve) => setTimeout(resolve, 2000))
+    navigation.navigate("Welcome")
+    setIsLoading(false);
+  }
+
 
   const handleToggle = () => {
     setIsPasswordVisible(!isPasswordVisible);
@@ -54,43 +46,33 @@ const SignIn = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     dispatch(setLogin({
-      fullName: fullName,
-      userName: displayName,
       email: email,
       loggedIn: true
     }));
     try {
-      const response = await signInWithEmailAndPassword(auth, email, password);
-      await sendEmailVerification(auth.currentUser).catch((err) => console.log(err));
-      await updateProfile(auth.currentUser, { displayName: email }).catch((err) => console.log(err))
-      console.log(response);
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      console.log(userCredential);
+      setLoading(true);
+      await new Promise((resolve) => setTimeout(resolve, 2000));
       Alert.alert("Login Successful")
       navigation.navigate("Welcome")
+      setLoading(false);
     } catch (error) {
       console.log(error)
       Alert.alert("Wrong username/email and password")
-    } finally {
       setLoading(false);
     }
   }
 
-  // GoogleSignin.configure({
-  //   webClientId: PAYSTACK_API_KEY,
-  // })
-
-  // const signInWithGoogle = async () => {
-  //   try {
-  //     await GoogleSignin.hasPlayServices();
-  //     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-
-  //     await auth.signInWithCredential(googleCredential);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //   }, 5000);
+  // }, [])
 
   return (
     <>
+      {/* {!loading ? */}
       <View style={styles.loginPage}>
         <Text style={styles.loginHeader}>Welcome to NuelPay</Text>
         <View style={styles.loginContainer}>
@@ -116,14 +98,19 @@ const SignIn = () => {
               <Ionicons name={isPasswordVisible ? "eye-off" : "eye"} size={24} color={"#0357ee"} />
             </Pressable>
           </View>
+
+
+
           <CustomButton style={styles.loginButton} onPress={handleLogin}>
-            {loading ? "Loading" : "Login"}
+            Login
+            {isLoading && <ActivityIndicator size='large' color={"#0357ee"} style={styles.loader} />}
           </CustomButton>
-          {/* <View>  
+
+          <View style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center", gap: 25 }}>
             <Ionicons name="logo-google" size={20} />
             <Ionicons name="logo-facebook" size={20} />
             <Ionicons name="logo-apple" size={20} />
-          </View> */}
+          </View>
           <View style={styles.otherlinks}>
             <Text
               style={styles.otherlinkStyles}
@@ -141,9 +128,10 @@ const SignIn = () => {
 
 export default SignIn;
 
-console.log({ windowHeight, windowWidth });
-
 const styles = StyleSheet.create({
+  loader: {
+    backgroundColor: "#0357ee",
+  },
   loginPage: {
     flex: 1,
     backgroundColor: "#0357ee",
@@ -225,4 +213,9 @@ const styles = StyleSheet.create({
     fontWeight: 400,
     fontSize: 17,
   },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  }
 });

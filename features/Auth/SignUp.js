@@ -2,7 +2,7 @@ import { Alert, KeyboardAvoidingView, Pressable, StyleSheet, Text, View } from '
 import React, { useState } from 'react'
 import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from 'firebase/auth'
 import { useNavigation } from '@react-navigation/native';
-import { FIREBASE_AUTH } from '../../firebaseconfig';
+import { FIREBASE_AUTH, FIREBASE_STORE } from '../../firebaseconfig';
 import { Ionicons } from "@expo/vector-icons";
 
 import CustomInput from '../../components/CustomInput';
@@ -15,31 +15,36 @@ const SignUp = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const auth = FIREBASE_AUTH;
+  const db = FIREBASE_STORE;
 
   const [fullName, setFullName] = useState("");
-  const [displayName, setDisplayName] = useState("");
+  const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false); //handle hide and see password
 
   const handleToggle = () => {
     setIsPasswordVisible(!isPasswordVisible);
   }
 
+  //handle sign up with firebase auth
   const handleRegistration = async (e) => {
     e.preventDefault();
     dispatch(setLogin({
       fullName: fullName,
-      displayName: displayName,
+      userName: userName,
       loggedIn: true,
     }))
     try {
-      const response = await createUserWithEmailAndPassword(auth, email, password);
-      await sendEmailVerification(auth.currentUser).catch((err) => console.log(err));
-      await updateProfile(auth.currentUser, { displayName: fullName }).catch((err) => console.log(err))
-      console.log(response);
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      console.log(userCredential);
+      const uid = userCredential.user.uid;
+      await db.collection('users').doc(uid).set({
+        userName,
+        email
+      });
       Alert.alert("We are glad you joined us" + response)
       navigation.navigate("Welcome")
     } catch (error) {
@@ -59,13 +64,13 @@ const SignUp = () => {
 
             <View style={{ display: "flex", flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: 12 }}>
               <CustomInput placeholder="Full Name" value={fullName} onChangeText={(text) => setFullName(text)} />
-              <CustomInput placeholder="displayName" value={displayName} onChangeText={(text) => setDisplayName(text)} />
+              <CustomInput placeholder="User Name" value={userName} onChangeText={(text) => setUserName(text)} />
               <CustomInput placeholder="email" value={email} onChangeText={(text) => setEmail(text)} />
               {/* <View style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center", }}> */}
-                <CustomInput placeholder="password" value={password} onChangeText={(text) => setPassword(text)} secureTextEntry={!isPasswordVisible} maxLength={15} />
-                <Pressable onPress={handleToggle} style={{ position: 'absolute', right: 30, top: 275 }}>
-                  <Ionicons name={isPasswordVisible ? "eye-off" : "eye"} size={24} color={"#0357ee"} />
-                </Pressable>
+              <CustomInput placeholder="password" value={password} onChangeText={(text) => setPassword(text)} secureTextEntry={!isPasswordVisible} maxLength={15} />
+              <Pressable onPress={handleToggle} style={{ position: 'absolute', right: 30, top: 275 }}>
+                <Ionicons name={isPasswordVisible ? "eye-off" : "eye"} size={24} color={"#0357ee"} />
+              </Pressable>
               {/* </View> */}
             </View>
 

@@ -23,14 +23,14 @@ const Stack = createStackNavigator();
 export function Welcome() {
   return (
     <>
-      <Tab.Navigator>
+      <Tab.Navigator screenOptions={{ tabBarStyle: { height: 60 }, tabBarActiveTintColor: '#0357ee', tabBarInactiveTintColor: '#808080' }}>
         <Tab.Screen
           name="Wallet"
           component={AccountDetails}
           options={{
             headerShown: false,
-            tabBarIcon: () => (
-              <Ionicons name="wallet-outline" size={30} color={"#0357ee"} />
+            tabBarIcon: ({ focused }) => (
+              <Ionicons name="wallet-outline" size={30} color={focused ? "#0357ee" : "#808080"} />
             ),
           }}
         />
@@ -40,11 +40,11 @@ export function Welcome() {
           options={{
             headerTitleStyle: { color: "#fff" },
             headerStyle: { backgroundColor: "#0357ee" },
-            tabBarIcon: () => (
+            tabBarIcon: ({ focused }) => (
               <Ionicons
                 name="notifications-outline"
                 size={30}
-                color={"#0357ee"}
+                color={focused ? "#0357ee" : "#808080"}
               />
             ),
             headerTitleStyle: { color: "#fff" }
@@ -56,8 +56,8 @@ export function Welcome() {
           options={{
             headerTitleStyle: { color: "#fff" },
             headerStyle: { backgroundColor: "#0357ee" },
-            tabBarIcon: () => (
-              <Ionicons name="person-outline" size={30} color={"#0357ee"} />
+            tabBarIcon: ({ focused }) => (
+              <Ionicons name="person-outline" size={30} color={focused ? "#0357ee" : "#808080"} />
             ),
           }}
         />
@@ -67,8 +67,8 @@ export function Welcome() {
           options={{
             headerTitleStyle: { color: "#fff" },
             headerStyle: { backgroundColor: "#0357ee" },
-            tabBarIcon: () => (
-              <Ionicons name="settings-outline" size={30} color={"#0357ee"} />
+            tabBarIcon: ({ focused }) => (
+              <Ionicons name="settings-outline" size={30} color={focused ? "#0357ee" : "#808080"} />
             ),
           }}
         />
@@ -80,7 +80,7 @@ export function Welcome() {
 export function App() {
   return (
     <>
-      <StatusBar style="#0357ee" />
+      <StatusBar style="light" />
       <Provider store={store}>
         <NavigationContainer>
           <Stack.Navigator>
