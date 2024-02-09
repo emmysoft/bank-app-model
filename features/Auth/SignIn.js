@@ -1,18 +1,16 @@
 import { Alert, StyleSheet, Text, View, Pressable, Dimensions, ActivityIndicator } from "react-native";
 import { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
+import { ref, onValue } from 'firebase/database';
 import { Ionicons } from "@expo/vector-icons";
 // import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import CustomInput from "../../components/CustomInput";
 import { CustomButton } from "../../components/CustomButton";
-import { GoogleAuthProvider, sendEmailVerification, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { FIREBASE_AUTH } from "../../firebaseconfig";
-// import { GoogleSignin, GoogleSigninButton } from '@react-native-community/google-signin';
-import { selectLogin, setLogin, setSignUp } from "../../redux/authSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { SafeAreaView } from "react-native-safe-area-context";
-// import { PAYSTACK_API_KEY } from "../../util/api";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { FIREBASE_AUTH, database } from "../../firebaseconfig";
+import { setLogin } from "../../redux/authSlice";
+import { useDispatch } from "react-redux";
 
 const SignIn = () => {
 
@@ -21,28 +19,22 @@ const SignIn = () => {
   const dispatch = useDispatch();
   // const user = useSelector(selectLogin);
 
+  const [userName, setUserName] = useState()
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
 
   //function for handling loading new screen with ActivityIndicator
-  const handleLoading = async () => {
-    setIsLoading(true);
-    await new Promise((resolve) => setTimeout(resolve, 2000))
-    navigation.navigate("Welcome")
-    setIsLoading(false);
-  }
 
-
+  //handle visibility of password
   const handleToggle = () => {
     setIsPasswordVisible(!isPasswordVisible);
   }
 
   //firebase auth
-
   const handleLogin = async (e) => {
     e.preventDefault();
     dispatch(setLogin({
@@ -52,23 +44,18 @@ const SignIn = () => {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       console.log(userCredential);
-      setLoading(true);
-      await new Promise((resolve) => setTimeout(resolve, 2000));
       Alert.alert("Login Successful")
       navigation.navigate("Welcome")
-      setLoading(false);
+
+      //function for handling loading new screen with ActivityIndicator
+      setIsLoading(true);
+      await new Promise((resolve) => setTimeout(resolve, 2000))
+      setIsLoading(false);
     } catch (error) {
       console.log(error)
       Alert.alert("Wrong username/email and password")
-      setLoading(false);
     }
   }
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setLoading(false);
-  //   }, 5000);
-  // }, [])
 
   return (
     <>

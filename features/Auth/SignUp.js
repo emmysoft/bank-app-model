@@ -1,8 +1,9 @@
 import { Alert, KeyboardAvoidingView, Pressable, StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
-import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from 'firebase/auth'
+import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { useNavigation } from '@react-navigation/native';
-import { FIREBASE_AUTH, FIREBASE_STORE } from '../../firebaseconfig';
+import { FIREBASE_AUTH, database } from '../../firebaseconfig';
+import { ref, set } from "firebase/database";
 import { Ionicons } from "@expo/vector-icons";
 
 import CustomInput from '../../components/CustomInput';
@@ -15,7 +16,6 @@ const SignUp = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const auth = FIREBASE_AUTH;
-  const db = FIREBASE_STORE;
 
   const [fullName, setFullName] = useState("");
   const [userName, setUserName] = useState("");
@@ -40,12 +40,13 @@ const SignUp = () => {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       console.log(userCredential);
-      const uid = userCredential.user.uid;
-      await db.collection('users').doc(uid).set({
-        userName,
-        email
+      Alert.alert("We are glad you joined us" + userCredential)
+      set(ref(database, 'users/' + userName), {
+        username: userName,
+        email: email,
+      }).then(() => {
+        Alert.alert("data update");
       });
-      Alert.alert("We are glad you joined us" + response)
       navigation.navigate("Welcome")
     } catch (error) {
       console.log(error)

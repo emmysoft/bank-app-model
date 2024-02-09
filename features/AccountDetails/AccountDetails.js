@@ -1,23 +1,20 @@
-import { View, Text, StyleSheet, Alert, StatusBar } from "react-native";
-import { useState, useEffect } from "react";
+import { View, Text, StyleSheet, StatusBar, Alert } from "react-native";
+import { useEffect, useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
-// import WalletsAfrica from "wallets-africa-api";
+import { useDispatch } from "react-redux";
+import { setLogout } from "../../redux/authSlice";
+import { ref, onValue, getDatabase } from 'firebase/database';
+import * as firebase from 'firebase/app'; 
 
 import Feature from "../Feat/Feature";
-import { useDispatch, useSelector } from "react-redux";
-import { selectLogin, setLogout } from "../../redux/authSlice";
-import { FIREBASE_STORE } from "../../firebaseconfig";
-// import { FIREBASE_AUTH, FIREBASE_STORE } from "../../firebaseconfig";
-// import { WALLETS_PUB_KEY, WALLETS_SEC_KEY } from "../../util/api";
+import { FIREBASE_AUTH, database } from "../../firebaseconfig";
 
+const AccountDetails = ({ navigation }) => {
 
-const fetchUser = async (uid) => {
-  const doc = await db.collection('users').doc(uid).get();
-  return doc.data();
-}
-
-const AccountDetails = ({ navigation, uid }) => {
-
+  //get database
+  const db = getDatabase();
+  const auth = FIREBASE_AUTH;
+  ;
   //handle balance cash state
   const [balance, setBalance] = useState("1,000.00");
 
@@ -25,24 +22,48 @@ const AccountDetails = ({ navigation, uid }) => {
     setBalance(balance);
   };
 
-  //handle login and logout state from redux toolkit
+  //handle logout state from redux toolkit
   const dispatch = useDispatch();
-  const user = useSelector(selectLogin);
 
   const handleLogout = () => {
     dispatch(setLogout())
   }
 
   //handle user data from database
-  const [userName, setUserName] = useState(null);
+  // const [userName, setUserName] = useState("");
+
+  // useEffect(() => {
+  //   const starCountRef = ref(database, 'users/' + userName.uid);
+  //   onValue(starCountRef, (snapshot) => {
+  //     const data = snapshot.val();
+  //     setUserName(data);
+  //   });
+  // })
+
+  const [userData, setUserData] = useState(null); // Store fetched user data
 
   useEffect(() => {
     const fetchUserData = async () => {
-      const data = await fetchUser(uid);
-      setUserName(data);
+      const user = firebase.auth().currentUser;
+
+      if (user) { // Check if user is authenticated
+        const uid = user.uid;
+        const ref = firebase.database().ref(`users/${uid}`); // Create reference
+
+        onValue(ref, (snapshot) => {
+          const data = snapshot.val();
+          setUserData(data); // Update state with fetched data
+        });
+      } else {
+        // Handle unauthenticated case (e.g., redirect to login)
+        Alert.alert('you are not yet registered')
+        navigation.navigate("Register")
+      }
     };
     fetchUserData();
-  }, [uid]);
+  }, []);
+
+
 
   return (
     <>
@@ -50,7 +71,15 @@ const AccountDetails = ({ navigation, uid }) => {
         <StatusBar style="dark" barStyle={"dark-content"} />
         <View style={styles.header}>
           <View style={styles.profilename}>
-            {userName && <Text style={styles.title} onPress={() => navigation.navigate("Profile")}>Hello, {userName.userName} </Text>}
+            {userData &&
+              <Text
+                style={styles.title}
+                onPress={() => navigation.navigate("Profile")}
+              >
+                Hello, {userData.userName}
+              </Text>
+            }
+
           </View>
           <View style={styles.headIcon}>
             <Ionicons
@@ -121,11 +150,11 @@ const AccountDetails = ({ navigation, uid }) => {
 const styles = StyleSheet.create({
   scroll: {
     flex: 1,
-    display: "flex",
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#fff",
     gap: 30,
+    maxHeight: '100%'
   },
   header: {
     display: "flex",
