@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     fontSize: 24,
-    fontWeight: 500,
+    fontWeight: "500",
     color: "#fff",
     // flex: 1,
     margin: "auto",
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     // marginVertical: 20,
   },
   loginText: {
-    fontWeight: 500,
+    fontWeight: "500",
     fontSize: 28,
     color: "#0357ee",
     textAlign: "center",
@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
   },
   userText: {
-    fontWeight: 400,
+    fontWeight: "400",
     fontSize: 20,
     color: "#0357ee",
     marginHorizontal: 8,
@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
   },
   passwordText: {
-    fontWeight: 400,
+    fontWeight: "400",
     fontSize: 20,
     color: "#0357ee",
     marginHorizontal: 8,
@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
   },
   otherlinkStyles: {
     color: "#0357ee",
-    fontWeight: 400,
+    fontWeight: "400",
     fontSize: 17,
   },
   loadingContainer: {

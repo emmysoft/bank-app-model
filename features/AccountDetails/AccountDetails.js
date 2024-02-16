@@ -4,7 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
 import { setLogout } from "../../redux/authSlice";
 import { ref, onValue, getDatabase } from 'firebase/database';
-import * as firebase from 'firebase/app'; 
+import * as firebase from 'firebase/app';
 
 import Feature from "../Feat/Feature";
 import { FIREBASE_AUTH, database } from "../../firebaseconfig";
@@ -56,7 +56,7 @@ const AccountDetails = ({ navigation }) => {
         });
       } else {
         // Handle unauthenticated case (e.g., redirect to login)
-        Alert.alert('you are not yet registered')
+        Alert.alert('you are not yet registered' + " 😂 ")
         navigation.navigate("Register")
       }
     };
@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "flex-start",
-    fontWeight: 500,
+    fontWeight: "500",
     fontSize: 20,
     color: "#000",
     width: "200%",
@@ -212,12 +212,12 @@ const styles = StyleSheet.create({
     marginTop: 20
   },
   uppercontent: {
-    fontWeight: 300,
+    fontWeight: "300",
     fontSize: 15,
     color: "#fff",
   },
   balance: {
-    fontWeight: 600,
+    fontWeight: "600",
     fontSize: 30,
     color: "#fff",
   },

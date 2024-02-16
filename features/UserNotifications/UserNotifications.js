@@ -117,6 +117,6 @@ const styles = StyleSheet.create({
   notifyText: {
     color: "#808080",
     fontSize: 24,
-    fontWeight: 300,
+    fontWeight: "300",
   },
 });

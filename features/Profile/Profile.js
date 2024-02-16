@@ -1,13 +1,9 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
-import { useSelector } from "react-redux";
-import { selectLogin } from "../../redux/authSlice";
-import { FIREBASE_AUTH } from "../../firebaseconfig";
 
 const Profile = () => {
 
-  const auth = FIREBASE_AUTH;
   // const user = useSelector(selectLogin);
 
   return (
@@ -18,7 +14,7 @@ const Profile = () => {
           <View style={styles.details}>
             <View style={styles.name}>
               <Ionicons name="person-add-outline" size={20} color={"grey"} />
-              <Text>{auth.currentUser?.displayName}</Text>
+              <Text>Your Name</Text>
             </View>
             <View style={styles.sex}>
               <Ionicons name="person" size={20} color={"grey"} />
@@ -114,10 +110,10 @@ const styles = StyleSheet.create({
   transText: {
     textAlign: "center",
     fontSize: 17,
-    fontWeight: 400,
+    fontWeight: "400",
   },
   noTransaction: {
-    fontWeight: 300,
+    fontWeight: "300",
     fontSize: 15,
     color: "#808080",
     textAlign: "center",

@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     marginVertical: 150,
   },
   text: {
-    fontWeight: 300,
+    fontWeight: "300",
     fontSize: 24,
     color: "#808080",
   },

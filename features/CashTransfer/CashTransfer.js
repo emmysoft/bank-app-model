@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
   },
   transferText: {
-    fontWeight: 400,
+    fontWeight: "400",
     fontSize: 20,
     color: "#000",
   },

@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   },
   acctHead: {
     textAlign: "center",
-    fontWeight: 500,
+    fontWeight:"500",
     fontSize: 34,
     margin: 20,
     width: "90%",

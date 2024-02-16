@@ -11,7 +11,7 @@ export const CustomButton = ({ children, onPress, style }) => {
 const styles = StyleSheet.create({
   buttonText: {
     color: "#fff",
-    fontWeight: 500,
+    fontWeight: "500",
     fontSize: 20,
     textAlign: "center",
     padding: 10,

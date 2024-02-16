@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
   },
   otherlinkStyles: {
     color: "#0357ee",
-    fontWeight: 400,
+    fontWeight: "400",
     fontSize: 17,
   },
 })
