@@ -3,18 +3,16 @@ import { useEffect, useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
 import { setLogout } from "../../redux/authSlice";
-import { ref, onValue, getDatabase } from 'firebase/database';
-import * as firebase from 'firebase/app';
+import { FIREBASE_AUTH, database } from "../../firebaseconfig";
+import { ref, onValue } from "firebase/database";
+import { onAuthStateChanged } from "firebase/auth";
 
 import Feature from "../Feat/Feature";
-import { FIREBASE_AUTH, database } from "../../firebaseconfig";
 
 const AccountDetails = ({ navigation }) => {
 
-  //get database
-  const db = getDatabase();
+  //firebase get current user
   const auth = FIREBASE_AUTH;
-  ;
   //handle balance cash state
   const [balance, setBalance] = useState("1,000.00");
 
@@ -29,38 +27,22 @@ const AccountDetails = ({ navigation }) => {
     dispatch(setLogout())
   }
 
-  //handle user data from database
-  // const [userName, setUserName] = useState("");
+  // handle user data from database
+  // const user = auth.currentUser;
 
-  // useEffect(() => {
-  //   const starCountRef = ref(database, 'users/' + userName.uid);
-  //   onValue(starCountRef, (snapshot) => {
-  //     const data = snapshot.val();
-  //     setUserName(data);
-  //   });
-  // })
+  // if (user) {
+  //   Alert.alert("user is logged in successfully")
+  // } else {
+  //   Alert.alert("user is not logged in")
+  // }
 
-  const [userData, setUserData] = useState(null); // Store fetched user data
+  const [user, setUser] = useState("");
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      const user = firebase.auth().currentUser;
-
-      if (user) { // Check if user is authenticated
-        const uid = user.uid;
-        const ref = firebase.database().ref(`users/${uid}`); // Create reference
-
-        onValue(ref, (snapshot) => {
-          const data = snapshot.val();
-          setUserData(data); // Update state with fetched data
-        });
-      } else {
-        // Handle unauthenticated case (e.g., redirect to login)
-        Alert.alert('you are not yet registered' + " 😂 ")
-        navigation.navigate("Register")
-      }
-    };
-    fetchUserData();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user?.userName)
+    });
+    return unsubscribe;
   }, []);
 
 
@@ -71,15 +53,12 @@ const AccountDetails = ({ navigation }) => {
         <StatusBar style="dark" barStyle={"dark-content"} />
         <View style={styles.header}>
           <View style={styles.profilename}>
-            {userData &&
-              <Text
-                style={styles.title}
-                onPress={() => navigation.navigate("Profile")}
-              >
-                Hello, {userData.userName}
-              </Text>
-            }
-
+            <Text
+              style={styles.title}
+              onPress={() => navigation.navigate("Profile")}
+            >
+              Hello, {user?.userName}
+            </Text>
           </View>
           <View style={styles.headIcon}>
             <Ionicons
@@ -144,8 +123,10 @@ const AccountDetails = ({ navigation }) => {
         <Feature />
       </View>
     </>
-  );
+  )
 };
+
+export default AccountDetails;
 
 const styles = StyleSheet.create({
   scroll: {
@@ -235,6 +216,4 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 10,
   },
-});
-
-export default AccountDetails;
+})
