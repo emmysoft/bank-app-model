@@ -4,7 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
 import { setLogout } from "../../redux/authSlice";
 import { FIREBASE_AUTH, database } from "../../firebaseconfig";
-import { ref, onValue } from "firebase/database";
+// import { ref, onValue } from "firebase/database";
 import { onAuthStateChanged } from "firebase/auth";
 
 import Feature from "../Feat/Feature";
