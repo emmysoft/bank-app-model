@@ -130,12 +130,14 @@ export default AccountDetails;
 
 const styles = StyleSheet.create({
   scroll: {
-    flex: 1,
+    display: 'flex',
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#fff",
     gap: 30,
-    maxHeight: '100%'
+    maxHeight: '100%',
+    // padding: 12,
+    height: '100%'
   },
   header: {
     display: "flex",
